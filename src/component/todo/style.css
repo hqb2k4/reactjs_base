@@ -1,0 +1,35 @@
+.Todo-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.Todo-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.Todo-serach {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.Todo-data {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.Todo-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.Todo-item:last-child {
+    border-bottom: none;
+}
