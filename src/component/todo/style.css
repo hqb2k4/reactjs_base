@@ -33,3 +33,10 @@
 .Todo-item:last-child {
     border-bottom: none;
 }
+
+.Todo-image img {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+}
+
