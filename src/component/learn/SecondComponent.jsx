@@ -7,10 +7,17 @@ const BnousComponent = () => {
 }
 
 const SecondComponent = () => {
+    const message = "Xin chào";
+    const student = {
+        name: "Hoàng Quốc Bảo",
+        age: 21,
+        address: "Hà Nội",
+    }
     return (
-        <div>
-            <h1>Hoàng Quốc Bảo</h1>
-        </div>
+        <>
+            <h1>{message}</h1>
+            <h2>{JSON.stringify(student)}</h2>
+        </>
     );
 }
 export {SecondComponent, BnousComponent} ;
