@@ -6,12 +6,19 @@ function component = () => {
   )
 }
 */
+
+// import css
+import './style.css';
+
+//Fragment <></>
 const MyComponent = () => {
     return (
-        <div>
-            <h2>My Component</h2>
-            <p>Component = HTML + CSS + JS</p>
-        </div>
+        <> 
+            <h2 style={
+                {backgroundColor: 'lightblue'}
+            }>My Component</h2>
+            <p className="description">Component = HTML + CSS + JS</p>
+        </>
     );
 }
 
