@@ -12,7 +12,7 @@ const data = {
 }
 
 const alertMessage = (name) => {
-  alert(`Hello ${name}, welcome to the Todo app!`);
+  console.log(`Hello ${name}, welcome to the Todo app!`);
 }
 
 const App = () => {
