@@ -10,11 +10,18 @@ const data = {
   age: 21,
   address: "Ha Noi"
 }
+
+const alertMessage = (name) => {
+  alert(`Hello ${name}, welcome to the Todo app!`);
+}
+
 const App = () => {
   return ( 
         <div className="Todo-container">
             <div className="Todo-title">My Todo List</div>
-            <Todosearch />
+            <Todosearch 
+              alertMessage={alertMessage}
+            />
             <Tododata 
               name = {FullName}
               age = {Age}

@@ -1,4 +1,6 @@
-const Todosearch = () => {
+const Todosearch = (props) => {
+    const {alertMessage} = props;
+    alertMessage("Bảo"); 
     return (
         <div className="Todo-search">
             <input type="text" />
