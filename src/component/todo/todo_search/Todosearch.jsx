@@ -7,10 +7,11 @@ const Todosearch = (props) => {
     const buttonoOnClick = () => {
         console.log("Button clicked!", valueInput);
         alertMessage(valueInput);
+        setValueInput("");
     }
 
     const inputOnChange = (event) => {
-        console.log("Input changed!",event);
+        console.log("Input changed!", event);
         setValueInput(event);
     }
 
@@ -18,7 +19,10 @@ const Todosearch = (props) => {
     const [valueInput, setValueInput] = useState("Bảo");
     return (
         <div className="Todo-search">
-            <input type="text" onChange={(event) => inputOnChange(event.target.value)} />
+            <input type="text"
+                onChange={(event) => inputOnChange(event.target.value)}
+                value={valueInput}
+            />
             <button onClick={buttonoOnClick}>Add Todo</button>
             <div>{`My input ${valueInput}`}</div>
         </div>

@@ -3,14 +3,23 @@ const Tododata = (props) => {
     // props là một object chứa các thuộc tính được truyền từ component cha
 
     //destructuring props
-    const {name} = props;
+    // const { name, todoList } = props;
+    const {todoList} = props;
+    console.log(todoList);
     return (
         <div className="Todo-data">
-            <div className="Todo-item">Name: {name}</div>
-            <div className="Todo-item">Reactjs</div>
-            <div className="Todo-item">Vuejs</div>
-            <div className="Todo-item">Angular</div>
-            <div className="Todo-item">{JSON.stringify(props.todoList)}</div>
+            <div>{
+                todoList.map((value, index) => {
+                    return (
+                        <div className="Todo-item">
+                            <div>{value.name}</div>
+                            <button>DELETE</button>
+                        </div>
+                    );
+                })
+            }</div>
+            {/* <div className="Todo-item">Name: {name}</div>
+            <div className="Todo-item">{JSON.stringify(props.todoList)}</div> */}
         </div>
     );
 }
