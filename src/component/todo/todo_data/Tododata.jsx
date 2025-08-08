@@ -4,8 +4,14 @@ const Tododata = (props) => {
 
     //destructuring props
     // const { name, todoList } = props;
-    const {todoList} = props;
+    const {todoList, DeleteTodoList } = props;
     console.log(todoList);
+
+    // Delete Todo List
+    const buttonOnClickDeleteTodoList = (id) => {
+        console.log("Delete button clicked!", id);
+        DeleteTodoList(id);
+    }
     return (
         <div className="Todo-data">
             <div>{
@@ -13,7 +19,7 @@ const Tododata = (props) => {
                     return (
                         <div className="Todo-item" key={value.id}>
                             <div>{value.name}</div>
-                            <button>DELETE</button>
+                            <button onClick={() => buttonOnClickDeleteTodoList(value.id)}>DELETE</button>
                         </div>
                     );
                 })

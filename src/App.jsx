@@ -15,17 +15,23 @@ const data = {
 const App = () => {
   // useState hook 
   const [todoList, setTodoList] = useState([
-    // { id: 1, name: "Learn React" },
-    // { id: 2, name: "Build a Todo App" },
-    // { id: 3, name: "Deploy the App" }
+    { id: 1, name: "Learn React" },
+    { id: 2, name: "Build a Todo App" },
+    { id: 3, name: "Deploy the App" }
   ]);
+  console.log(`Todolist ${JSON.stringify(todoList)}`);
 
-  const alertMessage = (name) => {
+  const AddTodoList = (name) => {
     const newTodo = {
       id: randomIntFromInterval(4, 1000),
       name: name
     }
     setTodoList([...todoList, newTodo]);
+  }
+
+  const DeleteTodoList = (id) => {
+    const newTodoListAfterDelete = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoListAfterDelete);
   }
 
   const randomIntFromInterval = (min, max) => {
@@ -36,7 +42,7 @@ const App = () => {
     <div className="Todo-container">
       <div className="Todo-title">My Todo List</div>
       <Todosearch
-        alertMessage={alertMessage}
+        AddTodoList={AddTodoList}
       />
       { //{condition && <Component />}
         //{condition ? <Component /> : <Component />}
@@ -46,6 +52,7 @@ const App = () => {
             age={Age}
             data={data}
             todoList={todoList}
+            DeleteTodoList={DeleteTodoList}
           />
           :
           <div className="Todo-image">

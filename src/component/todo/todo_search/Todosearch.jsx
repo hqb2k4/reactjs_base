@@ -2,11 +2,12 @@ import { useState } from "react";
 
 
 const Todosearch = (props) => {
-    const { alertMessage } = props;
+    const { AddTodoList} = props;
 
-    const buttonoOnClick = () => {
+    // Add New Todo List
+    const buttonOnClickAddTodoList = () => {
         console.log("Button clicked!", valueInput);
-        alertMessage(valueInput);
+        AddTodoList(valueInput);
         setValueInput("");
     }
 
@@ -23,7 +24,7 @@ const Todosearch = (props) => {
                 onChange={(event) => inputOnChange(event.target.value)}
                 value={valueInput}
             />
-            <button onClick={buttonoOnClick}>Add Todo</button>
+            <button onClick={buttonOnClickAddTodoList}>Add Todo</button>
             <div>{`My input ${valueInput}`}</div>
         </div>
     );
