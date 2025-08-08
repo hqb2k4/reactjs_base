@@ -3,10 +3,10 @@ import { useState } from "react";
 
 const Todosearch = (props) => {
     const { alertMessage } = props;
-    alertMessage("Bảo");
 
     const buttonoOnClick = () => {
         console.log("Button clicked!", valueInput);
+        alertMessage(valueInput);
     }
 
     const inputOnChange = (event) => {

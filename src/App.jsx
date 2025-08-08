@@ -12,17 +12,25 @@ const data = {
   address: "Ha Noi"
 }
 
-const alertMessage = (name) => {
-  console.log(`Hello ${name}, welcome to the Todo app!`);
-}
-
 const App = () => {
   // useState hook 
   const [todoList, setTodoList] = useState([
-    { id: 1, text: "Learn React" },
-    { id: 2, text: "Build a Todo App" },
-    { id: 3, text: "Deploy the App" }
+    { id: 1, name: "Learn React" },
+    { id: 2, name: "Build a Todo App" },
+    { id: 3, name: "Deploy the App" }
   ]);
+
+  const alertMessage = (name) => {
+    const newTodo = {
+      id: randomIntFromInterval(4, 1000), 
+      name: name
+    }
+    setTodoList([...todoList, newTodo]);
+  }
+
+  const randomIntFromInterval = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   return (
     <div className="Todo-container">
