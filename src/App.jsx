@@ -15,14 +15,14 @@ const data = {
 const App = () => {
   // useState hook 
   const [todoList, setTodoList] = useState([
-    { id: 1, name: "Learn React" },
-    { id: 2, name: "Build a Todo App" },
-    { id: 3, name: "Deploy the App" }
+    // { id: 1, name: "Learn React" },
+    // { id: 2, name: "Build a Todo App" },
+    // { id: 3, name: "Deploy the App" }
   ]);
 
   const alertMessage = (name) => {
     const newTodo = {
-      id: randomIntFromInterval(4, 1000), 
+      id: randomIntFromInterval(4, 1000),
       name: name
     }
     setTodoList([...todoList, newTodo]);
@@ -38,15 +38,20 @@ const App = () => {
       <Todosearch
         alertMessage={alertMessage}
       />
-      <Tododata
-        name={FullName}
-        age={Age}
-        data={data}
-        todoList={todoList}
-      />
-      <div className="Todo-image">
-        <img src={img} />
-      </div>
+      { //{condition && <Component />}
+        //{condition ? <Component /> : <Component />}
+        todoList.length > 0 ?
+          <Tododata
+            name={FullName}
+            age={Age}
+            data={data}
+            todoList={todoList}
+          />
+          :
+          <div className="Todo-image">
+            <img src={img} />
+          </div>
+      }
     </div>
   )
 }

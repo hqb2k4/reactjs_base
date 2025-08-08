@@ -16,7 +16,7 @@ const Todosearch = (props) => {
     }
 
     //useState hook to manage input value
-    const [valueInput, setValueInput] = useState("Bảo");
+    const [valueInput, setValueInput] = useState("  ");
     return (
         <div className="Todo-search">
             <input type="text"

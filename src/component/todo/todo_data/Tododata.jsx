@@ -9,9 +9,9 @@ const Tododata = (props) => {
     return (
         <div className="Todo-data">
             <div>{
-                todoList.map((value, index) => {
+                todoList.map((value) => {
                     return (
-                        <div className="Todo-item">
+                        <div className="Todo-item" key={value.id}>
                             <div>{value.name}</div>
                             <button>DELETE</button>
                         </div>
