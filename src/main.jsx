@@ -4,18 +4,21 @@ import App from './App.jsx'
 import LoginPage from './pages/Login.jsx'
 import RegisterPage from './pages/Register.jsx'
 import UserPage from './pages/User.jsx'
-import ProductionPage from './pages/Production.jsx'
+import BookPage from './pages/Book.jsx'
 import './styles/global.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
 import TodoApp from './component/todo/TodoApp.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    // HandlingNotFound
+    errorElement: <ErrorPage />,
     // Nested routes
     children: [
       // Index route
@@ -24,12 +27,12 @@ const router = createBrowserRouter([
         element: <TodoApp />,
       },
       {
-        path: "/user",
+        path: "/users",
         element: <UserPage />,
       },
       {
-        path: "/production",
-        element: <ProductionPage />,
+        path: "/books",
+        element: <BookPage />,
       }
     ]
   },
