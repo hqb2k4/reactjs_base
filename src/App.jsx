@@ -2,8 +2,9 @@ import Tododata from "./component/todo/todo_data/Tododata"
 import Todosearch from "./component/todo/todo_search/Todosearch"
 import './component/todo/style.css'
 import img from "./assets/react.svg"
+import Header from './component/layout/Header/Header'
+import Footer from "./component/layout/Footer/Footer"
 import { useState } from "react";
-
 
 const FullName = "Hoang Quoc Bao";
 const Age = 21;
@@ -40,27 +41,32 @@ const App = () => {
   }
 
   return (
-    <div className="Todo-container">
-      <div className="Todo-title">My Todo List</div>
-      <Todosearch
-        AddTodoList={AddTodoList}
-      />
-      { //{condition && <Component />}
-        //{condition ? <Component /> : <Component />}
-        todoList.length > 0 ?
-          <Tododata
-            name={FullName}
-            age={Age}
-            data={data}
-            todoList={todoList}
-            DeleteTodoList={DeleteTodoList}
-          />
-          :
-          <div className="Todo-image">
-            <img src={img} />
-          </div>
-      }
-    </div>
+    <>
+      <Header />
+      <div className="Todo-container">
+        <div className="Todo-title">My Todo List</div>
+        <Todosearch
+          AddTodoList={AddTodoList}
+        />
+        { //{condition && <Component />}
+          //{condition ? <Component /> : <Component />}
+          todoList.length > 0 ?
+            <Tododata
+              name={FullName}
+              age={Age}
+              data={data}
+              todoList={todoList}
+              DeleteTodoList={DeleteTodoList}
+            />
+            :
+            <div className="Todo-image">
+              <img src={img} />
+            </div>
+        }
+      </div>
+      <Footer />
+    </>
+
   )
 }
 export default App
