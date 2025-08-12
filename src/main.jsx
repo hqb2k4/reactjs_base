@@ -1,5 +1,4 @@
 import { StrictMode } from 'react'
-import ReactDOM from "react-dom/client";
 import App from './App.jsx'
 import LoginPage from './pages/Login.jsx'
 import RegisterPage from './pages/Register.jsx'
@@ -12,6 +11,7 @@ import {
 } from "react-router";
 import TodoApp from './component/todo/TodoApp.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
+import { createRoot } from 'react-dom/client'
 
 const router = createBrowserRouter([
   {
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
   }
 ]);
 
-const root = document.getElementById("root");
-
-ReactDOM.createRoot(root).render(
-  <RouterProvider router={router} />,
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <RouterProvider router={router} />,
+  </StrictMode>  
 );
