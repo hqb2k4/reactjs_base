@@ -10,12 +10,19 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router";
+import TodoApp from './component/todo/TodoApp.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    // Nested routes
     children: [
+      // Index route
+      {
+        index: true,
+        element: <TodoApp />,
+      },
       {
         path: "/user",
         element: <UserPage />,
