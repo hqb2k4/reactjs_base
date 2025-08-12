@@ -15,6 +15,16 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/user",
+        element: <UserPage />,
+      },
+      {
+        path: "/production",
+        element: <ProductionPage />,
+      }
+    ]
   },
   {
     path: "/login",
@@ -23,15 +33,7 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
-  },
-  {
-    path: "/user",
-    element: <UserPage />,
-  },
-  {
-    path: "/production",
-    element: <ProductionPage />,
-  },
+  }
 ]);
 
 const root = document.getElementById("root");

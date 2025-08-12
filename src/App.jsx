@@ -5,6 +5,7 @@ import img from "./assets/react.svg"
 import Header from './component/layout/Header/Header'
 import Footer from "./component/layout/Footer/Footer"
 import { useState } from "react";
+import { Outlet } from "react-router"
 
 const FullName = "Hoang Quoc Bao";
 const Age = 21;
@@ -64,6 +65,7 @@ const App = () => {
             </div>
         }
       </div>
+      <Outlet />
       <Footer />
     </>
 
