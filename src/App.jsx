@@ -4,6 +4,7 @@ import './component/todo/style.css'
 import img from "./assets/react.svg"
 import { useState } from "react";
 
+
 const FullName = "Hoang Quoc Bao";
 const Age = 21;
 const data = {

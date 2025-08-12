@@ -1,6 +1,11 @@
 import { StrictMode } from 'react'
 import ReactDOM from "react-dom/client";
 import App from './App.jsx'
+import LoginPage from './pages/Login.jsx'
+import RegisterPage from './pages/Register.jsx'
+import UserPage from './pages/User.jsx'
+import ProductionPage from './pages/Production.jsx'
+import './styles/global.css'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,19 +18,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <div>Login Page</div>,
+    element: <LoginPage />,
   },
   {
     path: "/register",
-    element: <div>Register Page</div>,
+    element: <RegisterPage />,
   },
   {
     path: "/user",
-    element: <div>User Page</div>,
+    element: <UserPage />,
   },
   {
     path: "/production",
-    element: <div>Production Page</div>,
+    element: <ProductionPage />,
   },
 ]);
 
