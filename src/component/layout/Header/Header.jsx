@@ -1,10 +1,11 @@
+import { Link } from 'react-router';
 import './Header.css'
 const Header = () => {
     return (
         <ul>
-            <li><a className="active" href="/">Home</a></li>
-            <li><a href="/user">User</a></li>
-            <li><a href="/production">Production</a></li>
+            <li><Link className="active" to="/">Home</Link></li>
+            <li><Link to="/user">User</Link></li>
+            <li><Link to="/production">Production</Link></li>
         </ul>
     );
 }
