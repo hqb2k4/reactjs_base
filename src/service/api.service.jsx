@@ -1,6 +1,6 @@
 import instance from "./axios.customize";
 
-
+// Create User API - User Register
 const createUserAPI = (fullName, email, password, phone) => {
     const URL_REGISTER = "/api/v1/user/register"
     const data = {
@@ -12,4 +12,10 @@ const createUserAPI = (fullName, email, password, phone) => {
     return instance.post(URL_REGISTER, data);
 }
 
-export { createUserAPI }
+// Fetch All User
+const fetchAllUsersAPI = () => {
+    const URL_ALLUSERS = "/api/v1/user"
+    return instance.get(URL_ALLUSERS);
+}
+
+export { createUserAPI, fetchAllUsersAPI }
