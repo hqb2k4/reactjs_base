@@ -1,7 +1,7 @@
 import { Button, Input, notification, Modal } from 'antd';
 import { useState } from 'react';
 import { createUserAPI } from '../../service/api.service';
-const UserForm = () => {
+const UserForm = ({ fetchAllUser }) => {
     //useState Hook UserForm
     const [fullName, setFullName] = useState();
     const [email, setEmail] = useState();
@@ -11,6 +11,15 @@ const UserForm = () => {
 
     //useState Hook Modal Antd
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Reset and Close Modal
+    const resetAndCloseModal = () => {
+        setFullName('');
+        setEmail('');
+        setPhone('');
+        setPassword('');
+        setIsModalOpen(false);
+    };
 
     const handleBtnOkOnClick = async () => {
         try {
@@ -22,6 +31,7 @@ const UserForm = () => {
                     description: `User ${res.data.fullName} created successfully!`,
                 });
                 console.log("User created successfully:", res.data);
+                await fetchAllUser();
             }
         } catch (err) {
             api.error({
@@ -29,7 +39,7 @@ const UserForm = () => {
                 description: `Error: ${JSON.stringify(err.response.data.message)}`,
             });
         }
-        setIsModalOpen(false);
+        resetAndCloseModal();
     };
     return (
         <>
@@ -38,7 +48,7 @@ const UserForm = () => {
                 closable={{ 'aria-label': 'Custom Close Button' }}
                 open={isModalOpen}
                 onOk={handleBtnOkOnClick}
-                onCancel={() => { setIsModalOpen(false) }}
+                onCancel={resetAndCloseModal}
                 maskClosable={false}
             >
                 <div className='user-form' style={{ margin: '20px 0' }}>
