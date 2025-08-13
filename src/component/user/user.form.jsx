@@ -21,8 +21,8 @@ const UserForm = () => {
             }
         } catch (err) {
             api.error({
-                message: 'Create user failed',
-                description: err.message,
+                message: 'Create user failed'+ err.message,
+                description: `Error: ${JSON.stringify(err.response.data.message)}`,
             });
         }
     };
