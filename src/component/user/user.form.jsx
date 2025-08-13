@@ -1,4 +1,4 @@
-import { Button, Input, notification } from 'antd';
+import { Button, Input, notification, Modal } from 'antd';
 import { useState } from 'react';
 import { createUserAPI } from '../../service/api.service';
 const UserForm = () => {
@@ -8,7 +8,11 @@ const UserForm = () => {
     const [phone, setPhone] = useState();
     const [password, setPassword] = useState();
     const [api, contextHolder] = notification.useNotification();
-    const handleOnClick = async () => {
+
+    //useState Hook Modal Antd
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleBtnOkOnClick = async () => {
         try {
             const res = await createUserAPI(fullName, email, password, phone);
             //Optional Chaining ?. 
@@ -21,56 +25,68 @@ const UserForm = () => {
             }
         } catch (err) {
             api.error({
-                message: 'Create user failed'+ err.message,
+                message: 'Create user failed' + err.message,
                 description: `Error: ${JSON.stringify(err.response.data.message)}`,
             });
         }
+        setIsModalOpen(false);
     };
     return (
-        <div className='user-form' style={{ margin: '20px 0' }}>
-            {contextHolder}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                <div>
-                    <span>FullName</span>
-                    <Input
-                        placeholder="FullName"
-                        // props value UserForm to Input
-                        value={fullName}
-                        onChange={(event) => { setFullName(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <span>Email</span>
-                    <Input
-                        placeholder="Email"
-                        value={email}
-                        onChange={(event) => { setEmail(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <span>Password</span>
-                    <Input.Password
-                        placeholder="Password"
-                        value={password}
-                        onChange={(event) => { setPassword(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <span>Phone</span>
-                    <Input
-                        placeholder="Phone"
-                        value={phone}
-                        onChange={(event) => { setPhone(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <Button type="primary" onClick={handleOnClick}>
-                        Creat User
-                    </Button>
-                </div>
+        <>
+            <Modal
+                title="Basic Modal"
+                closable={{ 'aria-label': 'Custom Close Button' }}
+                open={isModalOpen}
+                onOk={handleBtnOkOnClick}
+                onCancel={() => { setIsModalOpen(false) }}
+                maskClosable={false}
+            >
+                <div className='user-form' style={{ margin: '20px 0' }}>
+                    {contextHolder}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        <div>
+                            <span>FullName</span>
+                            <Input
+                                placeholder="FullName"
+                                // props value UserForm to Input
+                                value={fullName}
+                                onChange={(event) => { setFullName(event.target.value) }}
+                            />
+                        </div>
+                        <div>
+                            <span>Email</span>
+                            <Input
+                                placeholder="Email"
+                                value={email}
+                                onChange={(event) => { setEmail(event.target.value) }}
+                            />
+                        </div>
+                        <div>
+                            <span>Password</span>
+                            <Input.Password
+                                placeholder="Password"
+                                value={password}
+                                onChange={(event) => { setPassword(event.target.value) }}
+                            />
+                        </div>
+                        <div>
+                            <span>Phone</span>
+                            <Input
+                                placeholder="Phone"
+                                value={phone}
+                                onChange={(event) => { setPhone(event.target.value) }}
+                            />
+                        </div>
+                    </div>
+                </div >
+            </Modal>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <h3>Table Users</h3>
+                <Button type="primary" onClick={() => setIsModalOpen(true)}>
+                    Creat User
+                </Button>
             </div>
-        </div >
-
+        </>
     );
 }
 export default UserForm;
