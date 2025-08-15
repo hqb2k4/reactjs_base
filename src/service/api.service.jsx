@@ -18,4 +18,16 @@ const fetchAllUsersAPI = () => {
     return instance.get(URL_ALLUSERS);
 }
 
-export { createUserAPI, fetchAllUsersAPI }
+// Update User
+const updateUserAPI = (_id, fullName, email, phone) => {
+    const URL_UPDATEUSER = `/api/v1/user/`
+    const data = {
+        _id: _id,
+        fullName: fullName,
+        email: email,
+        phone: phone
+    }
+    return instance.put(URL_UPDATEUSER, data);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI };

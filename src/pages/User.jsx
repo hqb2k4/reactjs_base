@@ -21,7 +21,7 @@ const UserPage = () => {
     return (
         <div style={{ padding: '20px' }}>
             <UserForm fetchAllUser={fetchAllUser} />
-            <UserTable dataUsers={dataUsers} />
+            <UserTable dataUsers={dataUsers} fetchAllUser={fetchAllUser} />
         </div>
     );
 }

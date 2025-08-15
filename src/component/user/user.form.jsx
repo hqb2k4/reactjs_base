@@ -21,7 +21,7 @@ const UserForm = ({ fetchAllUser }) => {
         setIsModalOpen(false);
     };
 
-    const handleBtnOkOnClick = async () => {
+    const handleBtnCreateOnClick = async () => {
         try {
             const res = await createUserAPI(fullName, email, password, phone);
             //Optional Chaining ?. 
@@ -47,7 +47,8 @@ const UserForm = ({ fetchAllUser }) => {
                 title="Basic Modal"
                 closable={{ 'aria-label': 'Custom Close Button' }}
                 open={isModalOpen}
-                onOk={handleBtnOkOnClick}
+                onOk={handleBtnCreateOnClick}
+                okText={"Create"}
                 onCancel={resetAndCloseModal}
                 maskClosable={false}
             >
