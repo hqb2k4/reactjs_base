@@ -1,7 +1,8 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Space, Table, Tag } from 'antd';
+import { message, Popconfirm, Table} from 'antd';
 import UpdateUserModal from './user.update.modal';
 import { useState } from 'react';
+import UserViewDetail from './user.view.detail';
 
 // Use props
 const UserTable = ({ dataUsers, fetchAllUser }) => {
@@ -9,13 +10,19 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
 
+    const [dataDetail, setDataDetail] = useState(null);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
     const columns = [
         {
             title: 'ID',
             dataIndex: '_id',
             render: (_, record) => (
                 <>
-                    <a href='#'>{record._id}</a>
+                    <a href='#' onClick={() => {
+                        setIsDrawerOpen(true);
+                        setDataDetail(record);
+                    }}>{record._id}</a>
                 </>
             ),
         },
@@ -42,27 +49,49 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
                 <>
                     <div style={{ display: 'flex', gap: '10px' }}>
                         <EditOutlined
-                            onClick={() => { 
-                                setIsModalUpdateOpen(true) 
+                            onClick={() => {
+                                setIsModalUpdateOpen(true)
                                 setDataUpdate(record);
                             }}
                             style={{ cursor: 'pointer', color: 'orange' }}
                         />
-                        <DeleteOutlined style={{ cursor: 'pointer', color: 'red' }} />
+                        <Popconfirm
+                            title="Delete the task"
+                            description="Are you sure to delete this task?"
+                            onConfirm={(e) => {
+                                console.log(e);
+                                message.success('Click on Yes');
+                            }}
+                            onCancel={(e) => {
+                                console.log(e);
+                                message.error('Click on No');
+                            }}
+                            okText="Yes"
+                            cancelText="No"
+                            placement='left'
+                        >
+                            <DeleteOutlined style={{ cursor: 'pointer', color: 'red' }} />
+                        </Popconfirm>      
                     </div>
                 </>
             ),
         },
     ];
+
     return (
         <>
             <Table columns={columns} dataSource={dataUsers} rowKey="_id" />
-            <UpdateUserModal 
+            <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModalUpdateOpen={setIsModalUpdateOpen}
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
                 fetchAllUser={fetchAllUser}
+            />
+            <UserViewDetail
+                isDrawerOpen={isDrawerOpen}
+                setIsDrawerOpen={setIsDrawerOpen}
+                dataDetail={dataDetail}
             />
         </>
     );
