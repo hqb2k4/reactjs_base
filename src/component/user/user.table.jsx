@@ -1,8 +1,9 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { message, Popconfirm, Table} from 'antd';
+import { notification, Popconfirm, Table} from 'antd';
 import UpdateUserModal from './user.update.modal';
 import { useState } from 'react';
 import UserViewDetail from './user.view.detail';
+import { deleteUserAPI } from '../../service/api.service';
 
 // Use props
 const UserTable = ({ dataUsers, fetchAllUser }) => {
@@ -12,6 +13,31 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
 
     const [dataDetail, setDataDetail] = useState(null);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+    const [api, contextHolder] = notification.useNotification();
+
+    const handlePopconfirmClick = async (_id) => {
+        try {
+            const res =  await deleteUserAPI(_id);
+            if (res.data) {
+                api.success(
+                    {
+                        message: 'Delete User',
+                        description: `User with ID ${_id} deleted successfully!`,
+                    }
+                );
+                fetchAllUser();
+            }
+        } catch (error) {
+            api.error(
+                {
+                    message: 'Delete User',
+                    description: `Failed to delete user with ID ${_id} - ${error.response.data.message}`,
+                }
+            );
+            console.error('Error deleting user:', error);
+        }
+    }
 
     const columns = [
         {
@@ -60,11 +86,10 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
                             description="Are you sure to delete this task?"
                             onConfirm={(e) => {
                                 console.log(e);
-                                message.success('Click on Yes');
+                                handlePopconfirmClick(record._id);
                             }}
                             onCancel={(e) => {
                                 console.log(e);
-                                message.error('Click on No');
                             }}
                             okText="Yes"
                             cancelText="No"
@@ -80,6 +105,7 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
 
     return (
         <>
+            {contextHolder}
             <Table columns={columns} dataSource={dataUsers} rowKey="_id" />
             <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}

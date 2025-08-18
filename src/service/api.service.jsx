@@ -30,4 +30,10 @@ const updateUserAPI = (_id, fullName, email, phone) => {
     return instance.put(URL_UPDATEUSER, data);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI };
+// Delete User
+const deleteUserAPI = (_id) => {
+    const URL_DELETEUSER = `/api/v1/user/${_id}`;
+    return instance.delete(URL_DELETEUSER);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI };
