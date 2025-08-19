@@ -1,12 +1,12 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { notification, Popconfirm, Table} from 'antd';
+import { notification, Popconfirm, Table } from 'antd';
 import UpdateUserModal from './user.update.modal';
 import { useState } from 'react';
 import UserViewDetail from './user.view.detail';
 import { deleteUserAPI } from '../../service/api.service';
 
 // Use props
-const UserTable = ({ dataUsers, fetchAllUser }) => {
+const UserTable = ({ dataUsers, fetchAllUser, current, total, page, setCurrent, setPage }) => {
 
     const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
@@ -18,7 +18,7 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
 
     const handlePopconfirmClick = async (_id) => {
         try {
-            const res =  await deleteUserAPI(_id);
+            const res = await deleteUserAPI(_id);
             if (res.data) {
                 api.success(
                     {
@@ -39,7 +39,27 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
         }
     }
 
+    // handle onChange Pagination
+    const onChange = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+        if (pagination && pagination.current) {
+            if (+pagination.current !== +current) {
+                setCurrent(+pagination.current);
+            }
+        }
+
+        if (pagination && pagination.pageSize) {
+            if (+pagination.pageSize !== +page) {
+                setPage(+pagination.pageSize);
+            }
+        }
+    };
+
     const columns = [
+        {
+            title: "Number",
+            render: (_, record, index) => (index + 1) + (current - 1) * page,
+        },
         {
             title: 'ID',
             dataIndex: '_id',
@@ -96,7 +116,7 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
                             placement='left'
                         >
                             <DeleteOutlined style={{ cursor: 'pointer', color: 'red' }} />
-                        </Popconfirm>      
+                        </Popconfirm>
                     </div>
                 </>
             ),
@@ -106,7 +126,19 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
     return (
         <>
             {contextHolder}
-            <Table columns={columns} dataSource={dataUsers} rowKey="_id" />
+            <Table
+                columns={columns}
+                dataSource={dataUsers}
+                rowKey="_id"
+                pagination={{
+                    current: current,
+                    pageSize: page,
+                    showSizeChanger: true,
+                    total: total,
+                    showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
+                }}
+                onChange={onChange}
+            />
             <UpdateUserModal
                 isModalUpdateOpen={isModalUpdateOpen}
                 setIsModalUpdateOpen={setIsModalUpdateOpen}

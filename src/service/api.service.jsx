@@ -13,8 +13,8 @@ const createUserAPI = (fullName, email, password, phone) => {
 }
 
 // Fetch All User
-const fetchAllUsersAPI = () => {
-    const URL_ALLUSERS = "/api/v1/user"
+const fetchAllUsersAPI = (current,page) => {
+    const URL_ALLUSERS = `/api/v1/user?current=${current}&pageSize=${page}`
     return instance.get(URL_ALLUSERS);
 }
 
