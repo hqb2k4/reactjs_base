@@ -36,4 +36,33 @@ const deleteUserAPI = (_id) => {
     return instance.delete(URL_DELETEUSER);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI };
+// Upload File
+const uploadFileAPI = (file, folder) => {
+    const URL_UPLOAD = `/api/v1/file/upload`;
+    const config = {
+        headers: {
+            "upload-type": folder,
+            "Content-Type": "multipart/form-data",
+        }
+    }
+    const bodyFormdata = new FormData();
+    bodyFormdata.append("fileImg", file);
+
+    return instance.post(URL_UPLOAD, bodyFormdata, config);
+}
+
+// Upload User Avatar
+const updateUserAvatarAPI = (avatar,_id, fullName, email, phone) => {
+    const URL_UPDATEUSER = `/api/v1/user/`
+    const data = {
+        avatar: avatar,
+        _id: _id,
+        fullName: fullName,
+        email: email,
+        phone: phone
+    }
+    return instance.put(URL_UPDATEUSER, data);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI };
+

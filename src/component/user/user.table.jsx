@@ -118,6 +118,7 @@ const UserTable = ({ dataUsers, fetchAllUser }) => {
                 isDrawerOpen={isDrawerOpen}
                 setIsDrawerOpen={setIsDrawerOpen}
                 dataDetail={dataDetail}
+                fetchAllUser={fetchAllUser}
             />
         </>
     );
