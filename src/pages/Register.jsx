@@ -1,6 +1,7 @@
 import { Button, Form, Input, notification, Typography } from "antd";
 import { useState } from "react";
 import { registerUserAPI } from "../service/api.service";
+import { useNavigate } from "react-router";
 
 const { Title } = Typography;
 
@@ -8,10 +9,10 @@ const RegisterPage = () => {
     const [formRegister] = Form.useForm();
     const [loading, setLoading] = useState(false);
     const [api, contextHolder] = notification.useNotification();
-
+    const navigate = useNavigate();
 
     const onFinish = async (values) => {
-        console.log("Register success:", values);
+        setLoading(true);
         try {
             const res = await registerUserAPI(
                 values.fullname,
@@ -19,20 +20,23 @@ const RegisterPage = () => {
                 values.password,
                 values.phone
             );
+
             if (res.data) {
                 api.success({
-                    message: 'User registered successfully',
+                    message: "User registered successfully",
                     description: `User ${res.data.fullName} registered successfully!`,
                 });
-                console.log("User registered successfully:", res.data);
                 formRegister.resetFields();
-                setLoading(false);
+                navigate("/login");
             }
         } catch (error) {
             api.error({
-                message: 'Register user failed' + error.message,
-                description: `Error: ${JSON.stringify(error.response.data.message)}`,
+                message: "Register user failed",
+                description: `Error: ${error.response?.data?.message || error.message || "Unknown error"
+                    }`,
             });
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -50,24 +54,28 @@ const RegisterPage = () => {
             <div
                 style={{
                     background: "#fff",
-                    padding: "40px",
+                    padding: "30px 25px",
                     borderRadius: "12px",
                     boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-                    width: "100%",
+                    width: "90%", // responsive trên mobile
                     maxWidth: "500px",
+                    margin: "0 auto",
                 }}
             >
                 {contextHolder}
-                <Title level={3} style={{ textAlign: "center", marginBottom: "30px" }}>
+                <Title
+                    level={3}
+                    style={{ textAlign: "center", marginBottom: "20px", fontWeight: "600" }}
+                >
                     Create Account
                 </Title>
-
 
                 <Form
                     layout="vertical"
                     form={formRegister}
                     onFinish={onFinish}
                     requiredMark={false}
+                    style={{ display: "flex", flexDirection: "column", gap: "12px" }}
                 >
                     {/* Full Name */}
                     <Form.Item
@@ -107,7 +115,7 @@ const RegisterPage = () => {
                                 pattern:
                                     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
                                 message:
-                                    "Password must be at least 6 characters, include uppercase, lowercase, number, and special char",
+                                    "Password must be at least 6 chars, include uppercase, lowercase, number, and special char",
                             },
                         ]}
                         hasFeedback
@@ -152,14 +160,14 @@ const RegisterPage = () => {
                     </Form.Item>
 
                     {/* Submit Button */}
-                    <Form.Item>
+                    <Form.Item style={{ marginTop: "10px" }}>
                         <Button
                             type="primary"
                             htmlType="submit"
                             loading={loading}
                             block
                             style={{
-                                height: "40px",
+                                height: "42px",
                                 borderRadius: "8px",
                                 fontWeight: "500",
                             }}
