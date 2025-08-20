@@ -2,18 +2,18 @@ import instance from "./axios.customize";
 
 // Create User API - User Register
 const createUserAPI = (fullName, email, password, phone) => {
-    const URL_REGISTER = "/api/v1/user/register"
+    const URL_CREATEUSER = "/api/v1/user"
     const data = {
         fullName: fullName,
         email: email,
         password: password,
         phone: phone
     }
-    return instance.post(URL_REGISTER, data);
+    return instance.post(URL_CREATEUSER, data);
 }
 
 // Fetch All User
-const fetchAllUsersAPI = (current,page) => {
+const fetchAllUsersAPI = (current, page) => {
     const URL_ALLUSERS = `/api/v1/user?current=${current}&pageSize=${page}`
     return instance.get(URL_ALLUSERS);
 }
@@ -52,7 +52,7 @@ const uploadFileAPI = (file, folder) => {
 }
 
 // Upload User Avatar
-const updateUserAvatarAPI = (avatar,_id, fullName, email, phone) => {
+const updateUserAvatarAPI = (avatar, _id, fullName, email, phone) => {
     const URL_UPDATEUSER = `/api/v1/user/`
     const data = {
         avatar: avatar,
@@ -64,5 +64,17 @@ const updateUserAvatarAPI = (avatar,_id, fullName, email, phone) => {
     return instance.put(URL_UPDATEUSER, data);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI };
+// Register User
+const registerUserAPI = (fullName, email, password, phone) => {
+    const URL_REGISTER = "/api/v1/user/register"
+    const data = {
+        fullName: fullName,
+        email: email,
+        password: password,
+        phone: phone
+    }
+    return instance.post(URL_REGISTER, data);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI };
 
