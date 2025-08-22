@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router';
 // import './Header.css'
 import { Menu } from 'antd';
-import { AppstoreOutlined, HomeFilled, ReadOutlined, TeamOutlined} from '@ant-design/icons';
+import { AppstoreOutlined, HomeFilled, ReadOutlined, SettingOutlined, TeamOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 const Header = () => {
     const [current, setCurrent] = useState("");
@@ -24,6 +24,21 @@ const Header = () => {
             label: <Link to="/books">Books</Link>,
             key: 'books',
             icon: <ReadOutlined />,
+        },
+        {
+            label: 'Sign In',
+            key: 'SubMenu',
+            icon: <SettingOutlined />,
+            children: [
+                {
+                    type: 'group',
+                    label: 'Group',
+                    children: [
+                        { label: <Link to="/login">Sign In</Link>, key: 'SignIn' },
+                        { label: <Link to="/register">Sign Up</Link>, key: 'SignUp' },
+                    ],
+                },
+            ],
         },
     ];
     return (

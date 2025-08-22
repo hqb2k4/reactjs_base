@@ -1,7 +1,7 @@
-import { Button, Form, Input, notification, Typography } from "antd";
+import { Button, Divider, Form, Input, notification, Typography } from "antd";
 import { useState } from "react";
 import { registerUserAPI } from "../service/api.service";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const { Title } = Typography;
 
@@ -175,6 +175,17 @@ const RegisterPage = () => {
                             Register
                         </Button>
                     </Form.Item>
+
+                    <Divider></Divider>
+
+                    <div
+                        style={{
+                            marginTop: "12px",
+                            textAlign: "center",
+                        }}
+                    >
+                        <span>Do you have an Account? <Link to="/login">Login</Link></span>
+                    </div>
                 </Form>
             </div>
         </div>
