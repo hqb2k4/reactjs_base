@@ -12,6 +12,7 @@ import {
 import TodoApp from './component/todo/TodoApp.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import { createRoot } from 'react-dom/client'
+import { AuthWrapper } from './component/context/auth.context.jsx'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />,
-  </StrictMode>  
+    <AuthWrapper>
+      <RouterProvider router={router} />
+    </AuthWrapper>
+  </StrictMode>
 );

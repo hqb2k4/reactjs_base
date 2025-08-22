@@ -1,13 +1,17 @@
 import { Button, Checkbox, Divider, Form, Input, notification } from 'antd';
 import { Link, Navigate, useNavigate } from 'react-router';
 import { loginUserAPI } from '../service/api.service';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../component/context/auth.context';
 
 const LoginPage = () => {
     const [formLogin] = Form.useForm();
     const [api, contextHolder] = notification.useNotification();
     const navigate = useNavigate();
     const [isloading, setLoading] = useState(false);
+
+    const { setUserLoging } = useContext(AuthContext);
+
 
     const onFinish = async (values) => {
         setLoading(true);
@@ -19,6 +23,9 @@ const LoginPage = () => {
                     message: "Login successful",
                     description: `Welcome back, ${res.data.user.fullName}!`,
                 });
+                console.log("Login successful", res.data.access_token);
+                localStorage.setItem("access_token", res.data.access_token);
+                setUserLoging(res.data.user);
                 formLogin.resetFields();
                 navigate("/users"); 
             }
