@@ -76,5 +76,16 @@ const registerUserAPI = (fullName, email, password, phone) => {
     return instance.post(URL_REGISTER, data);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI };
+//Login User
+const loginUserAPI = (email, password) => {
+    const URL_LOGIN = "/api/v1/auth/login"
+    const data = {
+        username: email,
+        password: password,
+        delay: 2000
+    }
+    return instance.post(URL_LOGIN, data);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI, loginUserAPI };
 

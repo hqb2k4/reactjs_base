@@ -1,8 +1,39 @@
-import { Button, Checkbox, Divider, Form, Input } from 'antd';
-import { Link } from 'react-router';
+import { Button, Checkbox, Divider, Form, Input, notification } from 'antd';
+import { Link, Navigate, useNavigate } from 'react-router';
+import { loginUserAPI } from '../service/api.service';
+import { useState } from 'react';
 
 const LoginPage = () => {
     const [formLogin] = Form.useForm();
+    const [api, contextHolder] = notification.useNotification();
+    const navigate = useNavigate();
+    const [isloading, setLoading] = useState(false);
+
+    const onFinish = async (values) => {
+        setLoading(true);
+        try {
+            const res = await loginUserAPI(values.email, values.password);
+
+            if (res.data) {
+                api.success({
+                    message: "Login successful",
+                    description: `Welcome back, ${res.data.user.fullName}!`,
+                });
+                formLogin.resetFields();
+                navigate("/users"); 
+            }
+        } catch (error) {
+            api.error({
+                message: "Login failed",
+                description: `Error: ${error.response?.data?.message || error.message || "Unknown error"
+                    }`,
+            });
+        } finally {
+            setLoading(false); 
+        }
+    };
+
+
     return (
         <div
             style={{
@@ -25,10 +56,11 @@ const LoginPage = () => {
                     margin: "0 auto",
                 }}
             >
+                {contextHolder}
                 <Form
                     layout="vertical"
                     form={formLogin}
-                    // onFinish={onFinish}
+                    onFinish={onFinish}
                     requiredMark={false}
                     style={{ display: "flex", flexDirection: "column", gap: "12px" }}
                 >
@@ -58,7 +90,7 @@ const LoginPage = () => {
                         }}
                     >
                         <Form.Item label={null}>
-                            <Button type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" loading={isloading}>
                                 Submit
                             </Button>
                         </Form.Item>
