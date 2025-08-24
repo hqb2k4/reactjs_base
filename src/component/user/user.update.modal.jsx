@@ -39,7 +39,7 @@ const UpdateUserModal = ({ isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, 
                     message: 'User updated successfully',
                     description: `User updated successfully!`,
                 });
-                console.log("User updated successfully:", res.data);
+                // console.log("User updated successfully:", res.data);
                 await fetchAllUser();
             }
         } catch (err) {

@@ -23,7 +23,7 @@ const LoginPage = () => {
                     message: "Login successful",
                     description: `Welcome back, ${res.data.user.fullName}!`,
                 });
-                console.log("Login successful", res.data.access_token);
+                // console.log("Login successful", res.data.access_token);
                 localStorage.setItem("access_token", res.data.access_token);
                 setUserLoging(res.data.user);
                 formLogin.resetFields();

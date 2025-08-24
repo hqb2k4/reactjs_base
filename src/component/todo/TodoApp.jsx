@@ -19,7 +19,7 @@ const TodoApp = () => {
         { id: 2, name: "Build a Todo App" },
         { id: 3, name: "Deploy the App" }
     ]);
-    console.log(`Todolist ${JSON.stringify(todoList)}`);
+    // console.log(`Todolist ${JSON.stringify(todoList)}`);
 
     const AddTodoList = (name) => {
         const newTodo = {

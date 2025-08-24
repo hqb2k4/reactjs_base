@@ -30,7 +30,7 @@ const UserForm = ({ fetchAllUser }) => {
                     message: 'User created successfully',
                     description: `User ${res.data.fullName} created successfully!`,
                 });
-                console.log("User created successfully:", res.data);
+                // console.log("User created successfully:", res.data);
                 await fetchAllUser();
             }
         } catch (err) {

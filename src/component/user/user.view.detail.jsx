@@ -4,7 +4,7 @@ import { EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { updateUserAvatarAPI, uploadFileAPI } from "../../service/api.service";
 
 const UserViewDetail = ({ isDrawerOpen, setIsDrawerOpen, dataDetail, fetchAllUser }) => {
-    console.log("isDrawerOpen", isDrawerOpen);
+    // console.log("isDrawerOpen", isDrawerOpen);
     // Handling preview file upload
     // Convert file to base64
     const getBase64 = file =>
@@ -70,7 +70,7 @@ const UserViewDetail = ({ isDrawerOpen, setIsDrawerOpen, dataDetail, fetchAllUse
                         message: 'User avatar updated successfully',
                         description: `User avatar updated successfully!`,
                     });
-                    console.log("User avatar updated successfully:", resUpdateUserAvatar.data);
+                    // console.log("User avatar updated successfully:", resUpdateUserAvatar.data);
                     setIsDrawerOpen(false);
                     setFileList([]);
                     fetchAllUser();

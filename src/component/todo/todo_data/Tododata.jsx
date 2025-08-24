@@ -5,11 +5,11 @@ const Tododata = (props) => {
     //destructuring props
     // const { name, todoList } = props;
     const {todoList, DeleteTodoList } = props;
-    console.log(todoList);
+    // console.log(todoList);
 
     // Delete Todo List
     const buttonOnClickDeleteTodoList = (id) => {
-        console.log("Delete button clicked!", id);
+        // console.log("Delete button clicked!", id);
         DeleteTodoList(id);
     }
     return (

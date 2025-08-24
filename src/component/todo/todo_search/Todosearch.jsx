@@ -6,13 +6,13 @@ const Todosearch = (props) => {
 
     // Add New Todo List
     const buttonOnClickAddTodoList = () => {
-        console.log("Button clicked!", valueInput);
+        // console.log("Button clicked!", valueInput);
         AddTodoList(valueInput);
         setValueInput("");
     }
 
     const inputOnChange = (event) => {
-        console.log("Input changed!", event);
+        // console.log("Input changed!", event);
         setValueInput(event);
     }
 

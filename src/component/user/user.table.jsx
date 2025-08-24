@@ -41,7 +41,7 @@ const UserTable = ({ dataUsers, fetchAllUser, current, total, page, setCurrent, 
 
     // handle onChange Pagination
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+        // console.log('params', pagination, filters, sorter, extra);
         if (pagination && pagination.current) {
             if (+pagination.current !== +current) {
                 setCurrent(+pagination.current);
@@ -105,11 +105,11 @@ const UserTable = ({ dataUsers, fetchAllUser, current, total, page, setCurrent, 
                             title="Delete the task"
                             description="Are you sure to delete this task?"
                             onConfirm={(e) => {
-                                console.log(e);
+                                // console.log(e);
                                 handlePopconfirmClick(record._id);
                             }}
                             onCancel={(e) => {
-                                console.log(e);
+                                // console.log(e);
                             }}
                             okText="Yes"
                             cancelText="No"
