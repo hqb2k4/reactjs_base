@@ -93,5 +93,11 @@ const getAccountUserAPI = () => {
     return instance.get(URL_GETACCOUNTUSER);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI, loginUserAPI, getAccountUserAPI };
+// Logout Account User
+const logoutUserAPI = () => {
+    const URL_LOGOUTUSER = "/api/v1/auth/logout"
+    return instance.post(URL_LOGOUTUSER);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI, loginUserAPI, getAccountUserAPI, logoutUserAPI };
 

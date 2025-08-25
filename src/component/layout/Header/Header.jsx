@@ -1,16 +1,43 @@
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 // import './Header.css'
-import { Menu } from 'antd';
+import { Menu, message } from 'antd';
 import { AliwangwangOutlined, AppstoreOutlined, HomeFilled, LoginOutlined, ReadOutlined, SettingOutlined, TeamOutlined } from '@ant-design/icons';
 import { Children, useContext, useState } from 'react';
 import { AuthContext } from '../../context/auth.context';
+import { logoutUserAPI } from '../../../service/api.service';
 const Header = () => {
-    const { userLoging } = useContext(AuthContext);
+    const { userLoging, setUserLoging } = useContext(AuthContext);
     // console.log("userLoging", userLoging);
     const [current, setCurrent] = useState("");
     const onClick = e => {
         // console.log('click ', e);
         setCurrent(e.key);
+    };
+
+    const navigate = useNavigate();
+
+    // Handling LogOut
+    const handleLogOut = async () => {
+        // Perform logout logic here
+        // console.log("Logging out...");
+        const res = await logoutUserAPI();
+        // console.log("Logout response:", res);
+        if (res.data) {
+            localStorage.removeItem("access_token");
+            setUserLoging(
+                {
+                    "email": "",
+                    "phone": "",
+                    "fullName": "",
+                    "role": "",
+                    "avatar": "",
+                    "id": "",
+                }
+            );
+            message.success("Logout successful");
+            //redirect to home page
+            navigate("/");
+        }
     };
     const items = [
         {
@@ -45,8 +72,9 @@ const Header = () => {
                     icon: <AliwangwangOutlined />,
                     children: [
                         {
-                            label: "Logout",
+                            label: 'Logout',
                             key: 'logout',
+                            onClick: handleLogOut,
                         }
                     ]
                 }
