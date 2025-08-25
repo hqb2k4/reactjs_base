@@ -87,5 +87,11 @@ const loginUserAPI = (email, password) => {
     return instance.post(URL_LOGIN, data);
 }
 
-export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI, loginUserAPI };
+// Get Account User
+const getAccountUserAPI = () => {
+    const URL_GETACCOUNTUSER = "/api/v1/auth/account"
+    return instance.get(URL_GETACCOUNTUSER);
+}
+
+export { createUserAPI, fetchAllUsersAPI, updateUserAPI, deleteUserAPI, uploadFileAPI, updateUserAvatarAPI, registerUserAPI, loginUserAPI, getAccountUserAPI };
 
