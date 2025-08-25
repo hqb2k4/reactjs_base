@@ -23,8 +23,10 @@ const AuthWrapper = (props) => {
         }
     );
 
+    const [isAppLoading, setIsAppLoading] = useState(true);
+
     return (
-        <AuthContext.Provider value={{ userLoging, setUserLoging }}>
+        <AuthContext.Provider value={{ userLoging, setUserLoging, isAppLoading, setIsAppLoading }}>
             {props.children}
         </AuthContext.Provider>
     )

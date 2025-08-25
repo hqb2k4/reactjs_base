@@ -7,7 +7,7 @@ export default function ErrorPage() {
     return (
         <div id="error-page">
             <Result
-                status="403"
+                status="404"
                 title="Oops!"
                 subTitle={<i>{error.statusText || error.message}</i>}
                 extra={<Button type="primary">
